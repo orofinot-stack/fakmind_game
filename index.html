@@ -26,15 +26,17 @@
     }
 
     /* NIVELES 2x2 */
-    .levels {
-        margin-top: 25px;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(140px, 320px));
-        gap: 26px;
-        width: 90%;
-        max-width: 760px;
-        justify-content: center;
-    }
+  .levels {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    width: 100%;
+    max-width: 600px;
+    justify-items: center;     /* <-- centra cada botón */
+    align-items: center;
+}
+
 
     .level-button {
         background: #1a1a1a;
@@ -245,6 +247,7 @@ function volverMenu() {
 
 </body>
 </html>
+
 
 
 
