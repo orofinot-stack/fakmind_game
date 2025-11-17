@@ -1,71 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fakmind Game</title>
 
 <style>
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: black;
+        background: black;
         color: white;
+        font-family: Arial, sans-serif;
         text-align: center;
-    }
-
-    .logo {
-        width: 250px;
-        margin-top: 0px;
-    }
-
-    .qr-container {
-        position: absolute;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-    }
-
-    .qr {
-        width: 120px;
-        height: auto;
-    }
-
-    .qr-text {
-        font-size: 12px;
-        margin-top: 4px;
-    }
-
-    /* MENÚ */
-    #menu {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 12px;
-        margin-top: 5px;
     }
 
-    .boton-nivel {
-        width: 250px;
-        padding: 15px;
-        background: white;
-        color: black;
-        border-radius: 12px;
+    /* LOGO: más grande y casi pegado arriba */
+    .logo {
+        width: 300px;      /* usa assets/logo.png */
+        margin-top: 0px;   /* casi sin espacio con el borde */
+    }
+
+    /* NIVELES 2x2 */
+    .levels {
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 320px));
+        gap: 26px;
+        width: 90%;
+        max-width: 760px;
+        justify-content: center;
+    }
+
+    .level-button {
+        background: #1a1a1a;
+        padding: 26px 10px;
+        border-radius: 18px;
+        border: 2px solid #333;
+        font-size: 24px;
         font-weight: bold;
-        text-align: center;
-        font-size: 20px;
+        color: white;
         cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s;
     }
 
-    /* SUBTÍTULO DENTRO DEL BOTÓN */
-    .sub {
+    .level-button small {
+        display: block;
         font-size: 14px;
-        opacity: 0.7;
-        margin-top: 4px;
+        margin-top: 6px;
+        opacity: 0.8;
     }
 
-    /* NIVEL 1 */
+    .level-button:hover {
+        background: #333;
+    }
+
+    /* QR: más chico y más arriba */
+    .qr-wrapper {
+        margin-top: 40px;      /* entra en la pantalla del iPad */
+        margin-bottom: 18px;
+    }
+
+    .qr {
+        width: 150px;          /* usa assets/qr.png */
+        border-radius: 14px;
+    }
+
+    .qr-text {
+        margin-top: 4px;
+        font-size: 13px;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+        .logo {
+            width: 200px;
+        }
+        .levels {
+            gap: 18px;
+        }
+        .level-button {
+            font-size: 20px;
+            padding: 22px 8px;
+        }
+    }
+
+    /* ---------- ESTILOS NIVEL 1 ---------- */
     .nivel {
         display: none;
         flex-direction: column;
@@ -104,48 +129,65 @@
     .volver {
         margin-top: 30px;
         padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background: #333;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
     }
-
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- LOGO -->
-<img src="assets/logo.png" class="logo">
+    <!-- MENÚ ENVUELTO EN #menu (TODO IGUAL QUE ANTES) -->
+    <div id="menu">
+        <!-- LOGO -->
+        <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
-<!-- MENÚ PRINCIPAL -->
-<div id="menu">
+        <!-- NIVELES 2x2 -->
+        <div class="levels">
+            <!-- SOLO CAMBIO: onclick en NIVEL 1 -->
+            <div class="level-button" onclick="iniciarNivel1()">
+                NIVEL 1
+                <small>(ADIVINA LA MARCA)</small>
+            </div>
 
-    <div class="boton-nivel" onclick="iniciarNivel1()">
-        NIVEL 1
-        <div class="sub">(Adiviná la marca)</div>
+            <div class="level-button">
+                NIVEL 2
+            </div>
+
+            <div class="level-button">
+                NIVEL 3
+            </div>
+
+            <div class="level-button">
+                NIVEL 4
+            </div>
+        </div>
+
+        <!-- QR + TEXTO -->
+        <div class="qr-wrapper">
+            <img src="assets/qr.png" alt="QR Instagram" class="qr">
+            <div class="qr-text">¡Seguinos en Instagram!</div>
+        </div>
     </div>
 
-    <div class="boton-nivel">NIVEL 2</div>
-    <div class="boton-nivel">NIVEL 3</div>
-    <div class="boton-nivel">NIVEL 4</div>
+    <!-- ---------- NIVEL 1 (PANTALLA DEL JUEGO) ---------- -->
+    <div id="nivel1" class="nivel">
+        <h2>NIVEL 1 – ADIVINÁ LA MARCA</h2>
 
-</div>
+        <div class="contenedor-logo">
+            <img id="logoActual" src="" alt="Logo a adivinar">
+        </div>
 
-<!-- QR -->
-<div class="qr-container">
-    <img src="assets/qr.png" class="qr">
-    <div class="qr-text">¡Seguinos en Instagram!</div>
-</div>
+        <div id="opciones" class="opciones">
+            <!-- Opciones generadas por JS -->
+        </div>
 
-<!-- NIVEL 1 -->
-<div id="nivel1" class="nivel">
-    <h2>NIVEL 1 – ADIVINÁ LA MARCA</h2>
-
-    <div class="contenedor-logo">
-        <img id="logoActual" src="" alt="Logo a adivinar">
+        <button class="volver" onclick="volverMenu()">Volver al menú</button>
     </div>
-
-    <div id="opciones" class="opciones"></div>
-
-    <button class="volver" onclick="volverMenu()">Volver al menú</button>
-</div>
 
 <script>
 const logos = [
@@ -197,12 +239,13 @@ function verificar(seleccionada) {
 
 function volverMenu() {
     document.getElementById("nivel1").style.display = "none";
-    document.getElementById("menu").style.display = "flex";
+    document.getElementById("menu").style.display = "block";
 }
 </script>
 
 </body>
 </html>
+
 
 
 
