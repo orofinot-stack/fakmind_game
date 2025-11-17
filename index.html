@@ -26,30 +26,33 @@
     }
 
     /* NIVELES 2x2 */
-  .levels {
+.levels {
     margin-top: 25px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto); /* mantiene el tamaño grande */
     gap: 26px;
     width: 100%;
-    max-width: 600px;
-    justify-items: center;     /* <-- centra cada botón */
+    justify-content: center; /* centra toda la grilla */
     align-items: center;
 }
 
 
-    .level-button {
-        background: #1a1a1a;
-        padding: 26px 10px;
-        border-radius: 18px;
-        border: 2px solid #333;
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        cursor: pointer;
-        text-decoration: none;
-        transition: 0.2s;
-    }
+.level-button {
+    background: #1a1a1a;
+    padding: 26px 40px;         /* botones más grandes como antes */
+    border-radius: 18px;
+    border: 2px solid #333;
+    font-size: 26px;            /* texto grande */
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+    display: inline-block;      /* importante para tamaño */
+    text-align: center;
+    min-width: 160px;           /* tamaño mínimo para que no encojan */
+}
+
 
     .level-button small {
         display: block;
@@ -247,6 +250,7 @@ function volverMenu() {
 
 </body>
 </html>
+
 
 
 
