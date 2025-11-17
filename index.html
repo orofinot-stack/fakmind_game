@@ -3,94 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fakmind Game</title>
+<title>FAKMIND GAME</title>
 
 <style>
     body {
-        background: #000;
-        color: #fff;
+        margin: 0;
+        background: black;
+        color: white;
         font-family: Arial, sans-serif;
         text-align: center;
-        padding: 20px;
     }
 
-    /* Logo */
-    .logo img {
-        width: 160px;
-        margin-top: 20px;
-    }
-
-    /* Contenedor de niveles */
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        max-width: 700px;
-        margin: 40px auto;
-    }
-
-    .nivel {
-        background: #111;
-        padding: 30px 10px;
-        border-radius: 20px;
-        border: 1px solid #333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
-    .nivel small {
+    /* LOGO */
+    .logo {
+        width: 220px;     /* Aumenté tamaño */
+        margin: 30px auto 10px auto; /* Mucho menos espacio */
         display: block;
+    }
+
+    /* CONTENEDOR DE NIVELES */
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        width: 85%;
+        max-width: 700px;
+        margin: 0 auto;
+        margin-top: 10px; /* Pegado al logo */
+    }
+
+    /* BOTONES */
+    .boton {
+        background: #111;
+        border: 2px solid #333;
+        border-radius: 15px;
+        padding: 25px 10px;
+        font-size: 28px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-decoration: none;
+        color: white;
+        display: block;
+    }
+
+    .boton:hover {
+        background: #222;
+        border-color: #555;
+        transform: scale(1.03);
+    }
+
+    .sub {
         font-size: 14px;
+        color: #bbb;
         margin-top: 5px;
-        opacity: 0.7;
     }
 
     /* QR */
-    .qr img {
-        width: 180px;
-        background: white;
-        padding: 10px;
-        border-radius: 12px;
-        margin-top: 20px;
+    .qr {
+        width: 200px;
+        margin-top: 40px;
+        border-radius: 20px; /* Suave por si tu QR tiene esquinas */
     }
 
-    .qr-text {
-        margin-top: 8px;
-        font-size: 16px;
-        opacity: 0.8;
+    .insta-text {
+        margin-top: 10px;
+        font-size: 15px;
+        color: #ccc;
     }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- LOGO -->
-<div class="logo">
-    <img src="assets/fakmind_logo.png" alt="Fakmind Logo">
-</div>
+    <!-- LOGO -->
+    <img src="assets/keep/logo.png" class="logo">
 
-<!-- Cuadrícula de niveles -->
-<div class="grid">
+    <!-- BOTONES -->
+    <div class="container">
+        <a href="#" class="boton">NIVEL 1
+            <div class="sub">(ADIVINA LA MARCA)</div>
+        </a>
 
-    <div class="nivel">
-        NIVEL 1
-        <small>(ADIVINA LA MARCA)</small>
+        <a href="#" class="boton">NIVEL 2</a>
+        <a href="#" class="boton">NIVEL 3</a>
+        <a href="#" class="boton">NIVEL 4</a>
     </div>
 
-    <div class="nivel">NIVEL 2</div>
+    <!-- QR -->
+    <img src="assets/keep/qr.png" class="qr">
 
-    <div class="nivel">NIVEL 3</div>
-
-    <div class="nivel">NIVEL 4</div>
-
-</div>
-
-<!-- QR del Instagram -->
-<div class="qr">
-    <img src="assets/qr_instagram.png" alt="QR Instagram">
-</div>
-
-<div class="qr-text">¡Seguinos en Instagram!</div>
+    <div class="insta-text">¡Seguinos en Instagram!</div>
 
 </body>
 </html>
+
