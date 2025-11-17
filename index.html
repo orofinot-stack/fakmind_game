@@ -13,91 +13,119 @@
         text-align: center;
         margin: 0;
         padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* LOGO */
+    /* LOGO: más grande y casi pegado arriba */
     .logo {
-        width: 180px;
-        margin-top: 10px; /* menos espacio arriba */
+        width: 230px;      /* usa assets/logo.png */
+        margin-top: 4px;   /* casi sin espacio con el borde */
     }
 
-    /* Contenedor niveles */
+    /* NIVELES 2x2 */
     .levels {
-        margin-top: 20px;
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 320px));
+        gap: 26px;
+        width: 90%;
+        max-width: 760px;
+        justify-content: center;
     }
 
-    /* Botones */
     .level-button {
         background: #1a1a1a;
-        padding: 25px;
-        width: 300px;
-        margin: 15px;
-        border-radius: 15px;
+        padding: 26px 10px;
+        border-radius: 18px;
         border: 2px solid #333;
         font-size: 24px;
         font-weight: bold;
         color: white;
         cursor: pointer;
-        display: inline-block;
-        transition: 0.2s;
         text-decoration: none;
+        transition: 0.2s;
     }
 
     .level-button small {
         display: block;
         font-size: 14px;
-        margin-top: 5px;
+        margin-top: 6px;
+        opacity: 0.8;
     }
 
     .level-button:hover {
         background: #333;
     }
 
-    /* QR */
+    /* QR: más chico y más arriba */
+    .qr-wrapper {
+        margin-top: 40px;      /* entra en la pantalla del iPad */
+        margin-bottom: 18px;
+    }
+
     .qr {
-        width: 160px; /* más chico */
-        margin-top: 80px; /* más abajo */
-        margin-bottom: 5px;
+        width: 150px;          /* usa assets/qr.png */
+        border-radius: 14px;
     }
 
     .qr-text {
-        margin-top: 2px;
-        font-size: 12px;
+        margin-top: 4px;
+        font-size: 13px;
         opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+        .logo {
+            width: 200px;
+        }
+        .levels {
+            gap: 18px;
+        }
+        .level-button {
+            font-size: 20px;
+            padding: 22px 8px;
+        }
     }
 </style>
 
 </head>
 <body>
 
-<!-- LOGO -->
-<img src="assets/logo.png" alt="Fakmind Logo" class="logo">
+    <!-- LOGO -->
+    <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
-<!-- NIVELES -->
-<div class="levels">
+    <!-- NIVELES 2x2 -->
+    <div class="levels">
+        <a href="nivel1.html" class="level-button">
+            NIVEL 1
+            <small>(ADIVINA LA MARCA)</small>
+        </a>
 
-    <a href="nivel1.html" class="level-button">
-        NIVEL 1
-        <small>(ADIVINA LA MARCA)</small>
-    </a>
+        <a href="nivel2.html" class="level-button">
+            NIVEL 2
+        </a>
 
-    <a href="nivel2.html" class="level-button">NIVEL 2</a>
+        <a href="nivel3.html" class="level-button">
+            NIVEL 3
+        </a>
 
-    <br>
+        <a href="nivel4.html" class="level-button">
+            NIVEL 4
+        </a>
+    </div>
 
-    <a href="nivel3.html" class="level-button">NIVEL 3</a>
-
-    <a href="nivel4.html" class="level-button">NIVEL 4</a>
-
-</div>
-
-<!-- QR -->
-<img src="assets/qr.png" alt="QR Instagram" class="qr">
-
-<div class="qr-text">¡Seguinos en Instagram!</div>
+    <!-- QR + TEXTO -->
+    <div class="qr-wrapper">
+        <img src="assets/qr.png" alt="QR Instagram" class="qr">
+        <div class="qr-text">¡Seguinos en Instagram!</div>
+    </div>
 
 </body>
 </html>
+
 
 
 
