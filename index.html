@@ -76,26 +76,28 @@
         }
     }
 
-    /* --- LOGOS DE MATA Y YOUR FRIENDS ABAJO --- */
+    /* --- LOGOS DE MATA Y YOUR FRIENDS ABAJO PEGADOS A LOS BORDES --- */
     .bottom-logos {
         margin-top: 450px;
-        width: 90%;
-        max-width: 760px;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 5px 20px;
+        padding-left: 0;
+        padding-right: 0;
         box-sizing: border-box;
     }
 
     .logo-mata {
-        height: 30px;  /* Modificá este solo para el logo MATA */
+        height: 30px;
         object-fit: contain;
+        margin-left: 0;
     }
 
     .logo-yourfriends {
-        height: 70px; /* Modificá este solo para YOUR FRIENDS */
+        height: 70px;
         object-fit: contain;
+        margin-right: 0;
     }
 
     /* ---------- ESTILOS NIVEL 1 ---------- */
@@ -166,7 +168,7 @@
             <div class="level-button">NIVEL 4</div>
         </div>
 
-        <!-- LOGOS DE MATA Y YOUR FRIENDS -->
+        <!-- LOGOS DE MATA Y YOUR FRIENDS ABAJO -->
         <div class="bottom-logos">
             <img src="assets/mata.png" class="logo-mata" alt="Mata Club">
             <img src="assets/yourfriends.png" class="logo-yourfriends" alt="Your Friends">
@@ -190,58 +192,9 @@
 const logos = [
     {imagen: "assets/supreme.png", correcta: "Supreme", opciones: ["Supreme", "Stüssy", "Nike", "Carhartt"]},
     {imagen: "assets/offwhite.png", correcta: "Off-White", opciones: ["Off-White", "Adidas", "Yeezy", "Chrome Hearts"]},
-    {imagen: "assets/lv.png", correcta: "Louis Vuitton", opciones: ["Louis Vuitton", "Gucci", "Dior", "Fendi"]},
-    {imagen: "assets/palm.png", correcta: "Palm Angels", opciones: ["Palm Angels", "Fear of God", "Vans", "Kenzo"]},
-    {imagen: "assets/sp5der.png", correcta: "Sp5der", opciones: ["Sp5der", "Nike", "Supreme", "Puma"]}
-];
+    {imagen: "assets/lv.png", correcta: "Louis Vuitton", opciones: ["Louis Vuit]()
 
-let indice = 0;
 
-function iniciarNivel1() {
-    document.getElementById("menu").style.display = "none";
-    document.getElementById("nivel1").style.display = "flex";
-    indice = 0;
-    cargarPregunta();
-}
-
-function cargarPregunta() {
-    const logo = logos[indice];
-    document.getElementById("logoActual").src = logo.imagen;
-
-    const contOpciones = document.getElementById("opciones");
-    contOpciones.innerHTML = "";
-
-    logo.opciones.forEach(op => {
-        let btn = document.createElement("div");
-        btn.className = "opcion";
-        btn.innerText = op;
-        btn.onclick = () => verificar(op);
-        contOpciones.appendChild(btn);
-    });
-}
-
-function verificar(seleccionada) {
-    if (seleccionada === logos[indice].correcta) {
-        indice++;
-        if (indice >= logos.length) {
-            alert("¡Completaste el Nivel 1!");
-            volverMenu();
-        } else {
-            cargarPregunta();
-        }
-    } else {
-        alert("Incorrecto, intentá de nuevo.");
-    }
-}
-
-function volverMenu() {
-    document.getElementById("nivel1").style.display = "none";
-    document.getElementById("menu").style.display = "block";
-}
-</script>
-
-</body>
-</html>
 
 
 
