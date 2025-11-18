@@ -26,33 +26,31 @@
     }
 
     /* NIVELES 2x2 */
-.levels {
-    margin-top: 25px;
-    display: grid;
-    grid-template-columns: repeat(2, auto); /* mantiene el tamaño grande */
-    gap: 26px;
-    width: 100%;
-    justify-content: center; /* centra toda la grilla */
-    align-items: center;
-}
+    .levels {
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: repeat(2, auto); /* mantiene el tamaño grande */
+        gap: 26px;
+        width: 100%;
+        justify-content: center; /* centra toda la grilla */
+        align-items: center;
+    }
 
-
-.level-button {
-    background: #1a1a1a;
-    padding: 26px 40px;         /* botones más grandes como antes */
-    border-radius: 18px;
-    border: 2px solid #333;
-    font-size: 26px;            /* texto grande */
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.2s;
-    display: inline-block;      /* importante para tamaño */
-    text-align: center;
-    min-width: 160px;           /* tamaño mínimo para que no encojan */
-}
-
+    .level-button {
+        background: #1a1a1a;
+        padding: 26px 40px;         /* botones más grandes como antes */
+        border-radius: 18px;
+        border: 2px solid #333;
+        font-size: 26px;            /* texto grande */
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s;
+        display: inline-block;      /* importante para tamaño */
+        text-align: center;
+        min-width: 160px;           /* tamaño mínimo para que no encojan */
+    }
 
     .level-button small {
         display: block;
@@ -65,21 +63,21 @@
         background: #333;
     }
 
-    /* QR: más chico y más arriba */
-    .qr-wrapper {
-        margin-top: 40px;      /* entra en la pantalla del iPad */
-        margin-bottom: 18px;
+    /* LOGOS DE MATA Y YOUR FRIENDS ABAJO */
+    .bottom-logos {
+        margin-top: 40px;
+        width: 90%;
+        max-width: 760px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px 20px;
+        box-sizing: border-box;
     }
 
-    .qr {
-        width: 150px;          /* usa assets/qr.png */
-        border-radius: 14px;
-    }
-
-    .qr-text {
-        margin-top: 4px;
-        font-size: 13px;
-        opacity: 0.8;
+    .partner-logo {
+        height: 70px;          /* un poco más chico que el logo principal */
+        object-fit: contain;
     }
 
     @media (max-width: 600px) {
@@ -92,6 +90,9 @@
         .level-button {
             font-size: 20px;
             padding: 22px 8px;
+        }
+        .partner-logo {
+            height: 55px;
         }
     }
 
@@ -172,10 +173,11 @@
             </div>
         </div>
 
-        <!-- QR + TEXTO -->
-        <div class="qr-wrapper">
-            <img src="assets/qr.png" alt="QR Instagram" class="qr">
-            <div class="qr-text">¡Seguinos en Instagram!</div>
+        <!-- LOGOS DE MATA Y YOUR FRIENDS ABAJO -->
+        <div class="bottom-logos">
+            <!-- vos subís estos archivos -->
+            <img src="assets/mata.png" alt="MATA Club" class="partner-logo">
+            <img src="assets/yourfriends.png" alt="Your Friends" class="partner-logo">
         </div>
     </div>
 
@@ -250,6 +252,8 @@ function volverMenu() {
 
 </body>
 </html>
+
+
 
 
 
