@@ -24,17 +24,7 @@
     /* LOGO PRINCIPAL */
     .logo {
         width: 300px;
-        margin-top: 0px;
-    }
-
-    /* CONTENEDOR DEL MENÚ: CENTRADO EN PANTALLA */
-    #menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;              /* centra verticalmente */
-        height: calc(100vh - 100px);         /* deja espacio para los logos de abajo */
-        width: 100%;
+        margin-top: 0px;   /* bien pegado arriba como querías */
     }
 
     /* GRID DE NIVELES */
@@ -42,16 +32,16 @@
         margin-top: 25px;
         display: grid;
         grid-template-columns: repeat(2, auto);
-        gap: 26px 50px;                      /* gap filas x columnas */
+        gap: 26px 50px; /* filas, columnas (más separación horizontal) */
         width: 100%;
         justify-content: center;
         align-items: center;
     }
 
-    /* SEPARADOR ENTRE FILA 1–2 Y FILA 3–4 */
+    /* SEPARADOR ENTRE 1–2 y 3–4 PARA LAS PORTADAS */
     .level-row-separator {
-        grid-column: 1 / span 2;             /* ocupa las 2 columnas */
-        height: 70px;                        /* ESPACIO CENTRAL PARA PORTADAS */
+        grid-column: 1 / span 2; /* ocupa las dos columnas */
+        height: 70px;            /* ESPACIO CENTRAL: ajustalo si querés más o menos */
     }
 
     .level-button {
@@ -114,13 +104,13 @@
     .logo-mata {
         height: 30px;     /* tus tamaños */
         object-fit: contain;
-        margin-left: 10px;
+        margin-left: 10px;   /* ajuste fino hacia la izquierda */
     }
 
     .logo-yourfriends {
         height: 70px;     
         object-fit: contain;
-        margin-right: 10px;
+        margin-right: 10px;  /* ajuste fino hacia la derecha */
     }
 
     /* ---------- ESTILOS NIVEL 1 ---------- */
@@ -270,12 +260,15 @@ function verificar(seleccionada) {
 
 function volverMenu() {
     document.getElementById("nivel1").style.display = "none";
+    // Volvemos al estado original del menú (display por defecto del div)
     document.getElementById("menu").style.display = "block";
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
