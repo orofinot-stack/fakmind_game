@@ -17,6 +17,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative; /* para posicionar cosas respecto al body */
+        overflow: hidden;   /* por si algo se pasa 2px del borde */
     }
 
     /* LOGO PRINCIPAL */
@@ -78,26 +80,28 @@
 
     /* --- LOGOS DE MATA Y YOUR FRIENDS ABAJO PEGADOS A LOS BORDES --- */
     .bottom-logos {
-        margin-top: 500px;
+        position: absolute;
+        bottom: 10px;         /* distancia al borde inferior */
+        left: 0;
+        right: 0;
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* uno a la izquierda, otro a la derecha */
         align-items: center;
-        padding-left: -200;
-        padding-right: -200;
+        padding: 0;
         box-sizing: border-box;
     }
 
     .logo-mata {
-        height: 30px;
+        height: 30px;     /* tus tamaños */
         object-fit: contain;
-        margin-left: 0;
+        margin-left: -5px;   /* ajuste fino hacia afuera; poné -10px si querés más */
     }
 
     .logo-yourfriends {
-        height: 70px;
+        height: 70px;     
         object-fit: contain;
-        margin-right: 0;
+        margin-right: -5px;  /* idem pero hacia la derecha */
     }
 
     /* ---------- ESTILOS NIVEL 1 ---------- */
@@ -167,12 +171,12 @@
             <div class="level-button">NIVEL 3</div>
             <div class="level-button">NIVEL 4</div>
         </div>
+    </div>
 
-        <!-- LOGOS DE MATA Y YOUR FRIENDS ABAJO -->
-        <div class="bottom-logos">
-            <img src="assets/mata.png" class="logo-mata" alt="Mata Club">
-            <img src="assets/yourfriends.png" class="logo-yourfriends" alt="Your Friends">
-        </div>
+    <!-- LOGOS DE MATA Y YOUR FRIENDS ABAJO (FUERA DEL MENU PARA PEGARSE AL VIEWPORT) -->
+    <div class="bottom-logos">
+        <img src="assets/mata.png" class="logo-mata" alt="Mata Club">
+        <img src="assets/yourfriends.png" class="logo-yourfriends" alt="Your Friends">
     </div>
 
     <!-- ---------- NIVEL 1 ---------- -->
@@ -192,7 +196,59 @@
 const logos = [
     {imagen: "assets/supreme.png", correcta: "Supreme", opciones: ["Supreme", "Stüssy", "Nike", "Carhartt"]},
     {imagen: "assets/offwhite.png", correcta: "Off-White", opciones: ["Off-White", "Adidas", "Yeezy", "Chrome Hearts"]},
-    {imagen: "assets/lv.png", correcta: "Louis Vuitton", opciones: ["Louis Vuit]()
+    {imagen: "assets/lv.png", correcta: "Louis Vuitton", opciones: ["Louis Vuitton", "Gucci", "Dior", "Fendi"]},
+    {imagen: "assets/palm.png", correcta: "Palm Angels", opciones: ["Palm Angels", "Fear of God", "Vans", "Kenzo"]},
+    {imagen: "assets/sp5der.png", correcta: "Sp5der", opciones: ["Sp5der", "Nike", "Supreme", "Puma"]}
+];
+
+let indice = 0;
+
+function iniciarNivel1() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("nivel1").style.display = "flex";
+    indice = 0;
+    cargarPregunta();
+}
+
+function cargarPregunta() {
+    const logo = logos[indice];
+    document.getElementById("logoActual").src = logo.imagen;
+
+    const contOpciones = document.getElementById("opciones");
+    contOpciones.innerHTML = "";
+
+    logo.opciones.forEach(op => {
+        let btn = document.createElement("div");
+        btn.className = "opcion";
+        btn.innerText = op;
+        btn.onclick = () => verificar(op);
+        contOpciones.appendChild(btn);
+    });
+}
+
+function verificar(seleccionada) {
+    if (seleccionada === logos[indice].correcta) {
+        indice++;
+        if (indice >= logos.length) {
+            alert("¡Completaste el Nivel 1!");
+            volverMenu();
+        } else {
+            cargarPregunta();
+        }
+    } else {
+        alert("Incorrecto, intentá de nuevo.");
+    }
+}
+
+function volverMenu() {
+    document.getElementById("nivel1").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+}
+</script>
+
+</body>
+</html>
+
 
 
 
