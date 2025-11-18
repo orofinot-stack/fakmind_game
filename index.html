@@ -27,15 +27,31 @@
         margin-top: 0px;
     }
 
+    /* CONTENEDOR DEL MENÚ: CENTRADO EN PANTALLA */
+    #menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;              /* centra verticalmente */
+        height: calc(100vh - 100px);         /* deja espacio para los logos de abajo */
+        width: 100%;
+    }
+
     /* GRID DE NIVELES */
     .levels {
         margin-top: 25px;
         display: grid;
         grid-template-columns: repeat(2, auto);
-        gap: 26px;
+        gap: 26px 50px;                      /* gap filas x columnas */
         width: 100%;
         justify-content: center;
         align-items: center;
+    }
+
+    /* SEPARADOR ENTRE FILA 1–2 Y FILA 3–4 */
+    .level-row-separator {
+        grid-column: 1 / span 2;             /* ocupa las 2 columnas */
+        height: 70px;                        /* ESPACIO CENTRAL PARA PORTADAS */
     }
 
     .level-button {
@@ -70,11 +86,14 @@
             width: 200px;
         }
         .levels {
-            gap: 18px;
+            gap: 18px 30px;
         }
         .level-button {
             font-size: 20px;
             padding: 22px 8px;
+        }
+        .level-row-separator {
+            height: 50px;
         }
     }
 
@@ -95,13 +114,13 @@
     .logo-mata {
         height: 30px;     /* tus tamaños */
         object-fit: contain;
-        margin-left: 10px;   /* ajuste fino hacia afuera; poné -10px si querés más */
+        margin-left: 10px;
     }
 
     .logo-yourfriends {
         height: 70px;     
         object-fit: contain;
-        margin-right: 10px;  /* idem pero hacia la derecha */
+        margin-right: 10px;
     }
 
     /* ---------- ESTILOS NIVEL 1 ---------- */
@@ -160,15 +179,24 @@
         <!-- LOGO FAKMIND -->
         <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
-        <!-- NIVELES 2x2 -->
+        <!-- NIVELES 2x2 CON ESPACIO ENTRE FILAS -->
         <div class="levels">
+            <!-- Nivel 1 -->
             <div class="level-button" onclick="iniciarNivel1()">
                 NIVEL 1
                 <small>(ADIVINA LA MARCA)</small>
             </div>
 
+            <!-- Nivel 2 -->
             <div class="level-button">NIVEL 2</div>
+
+            <!-- SEPARADOR ENTRE FILAS (ESPACIO PARA PORTADAS) -->
+            <div class="level-row-separator"></div>
+
+            <!-- Nivel 3 -->
             <div class="level-button">NIVEL 3</div>
+
+            <!-- Nivel 4 -->
             <div class="level-button">NIVEL 4</div>
         </div>
     </div>
@@ -248,6 +276,8 @@ function volverMenu() {
 
 </body>
 </html>
+
+
 
 
 
