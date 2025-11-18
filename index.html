@@ -19,37 +19,37 @@
         align-items: center;
     }
 
-    /* LOGO: más grande y casi pegado arriba */
+    /* LOGO PRINCIPAL */
     .logo {
-        width: 300px;      /* usa assets/logo.png */
-        margin-top: 0px;   /* casi sin espacio con el borde */
+        width: 300px;
+        margin-top: 0px;
     }
 
-    /* NIVELES 2x2 */
+    /* GRID DE NIVELES */
     .levels {
         margin-top: 25px;
         display: grid;
-        grid-template-columns: repeat(2, auto); /* mantiene el tamaño grande */
+        grid-template-columns: repeat(2, auto);
         gap: 26px;
         width: 100%;
-        justify-content: center; /* centra toda la grilla */
+        justify-content: center;
         align-items: center;
     }
 
     .level-button {
         background: #1a1a1a;
-        padding: 26px 40px;         /* botones más grandes como antes */
+        padding: 26px 40px;
         border-radius: 18px;
         border: 2px solid #333;
-        font-size: 26px;            /* texto grande */
+        font-size: 26px;
         font-weight: bold;
         color: white;
         cursor: pointer;
         text-decoration: none;
         transition: 0.2s;
-        display: inline-block;      /* importante para tamaño */
+        display: inline-block;
         text-align: center;
-        min-width: 160px;           /* tamaño mínimo para que no encojan */
+        min-width: 160px;
     }
 
     .level-button small {
@@ -63,23 +63,6 @@
         background: #333;
     }
 
-    /* LOGOS DE MATA Y YOUR FRIENDS ABAJO */
-    .bottom-logos {
-        margin-top: 40px;
-        width: 90%;
-        max-width: 760px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px 20px;
-        box-sizing: border-box;
-    }
-
-    .partner-logo {
-        height: 70px;          /* un poco más chico que el logo principal */
-        object-fit: contain;
-    }
-
     @media (max-width: 600px) {
         .logo {
             width: 200px;
@@ -91,9 +74,28 @@
             font-size: 20px;
             padding: 22px 8px;
         }
-        .partner-logo {
-            height: 55px;
-        }
+    }
+
+    /* --- LOGOS DE MATA Y YOUR FRIENDS ABAJO --- */
+    .bottom-logos {
+        margin-top: 50px;
+        width: 90%;
+        max-width: 760px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 20px;
+        box-sizing: border-box;
+    }
+
+    .logo-mata {
+        height: 70px;  /* Modificá este solo para el logo MATA */
+        object-fit: contain;
+    }
+
+    .logo-yourfriends {
+        height: 70px; /* Modificá este solo para YOUR FRIENDS */
+        object-fit: contain;
     }
 
     /* ---------- ESTILOS NIVEL 1 ---------- */
@@ -147,41 +149,31 @@
 </head>
 <body>
 
-    <!-- MENÚ ENVUELTO EN #menu (TODO IGUAL QUE ANTES) -->
+    <!-- MENÚ PRINCIPAL -->
     <div id="menu">
-        <!-- LOGO -->
+        <!-- LOGO FAKMIND -->
         <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
         <!-- NIVELES 2x2 -->
         <div class="levels">
-            <!-- SOLO CAMBIO: onclick en NIVEL 1 -->
             <div class="level-button" onclick="iniciarNivel1()">
                 NIVEL 1
                 <small>(ADIVINA LA MARCA)</small>
             </div>
 
-            <div class="level-button">
-                NIVEL 2
-            </div>
-
-            <div class="level-button">
-                NIVEL 3
-            </div>
-
-            <div class="level-button">
-                NIVEL 4
-            </div>
+            <div class="level-button">NIVEL 2</div>
+            <div class="level-button">NIVEL 3</div>
+            <div class="level-button">NIVEL 4</div>
         </div>
 
-        <!-- LOGOS DE MATA Y YOUR FRIENDS ABAJO -->
+        <!-- LOGOS DE MATA Y YOUR FRIENDS -->
         <div class="bottom-logos">
-            <!-- vos subís estos archivos -->
-            <img src="assets/mata.png" alt="MATA Club" class="partner-logo">
-            <img src="assets/yourfriends.png" alt="Your Friends" class="partner-logo">
+            <img src="assets/mata.png" class="logo-mata" alt="Mata Club">
+            <img src="assets/yourfriends.png" class="logo-yourfriends" alt="Your Friends">
         </div>
     </div>
 
-    <!-- ---------- NIVEL 1 (PANTALLA DEL JUEGO) ---------- -->
+    <!-- ---------- NIVEL 1 ---------- -->
     <div id="nivel1" class="nivel">
         <h2>NIVEL 1 – ADIVINÁ LA MARCA</h2>
 
@@ -189,9 +181,7 @@
             <img id="logoActual" src="" alt="Logo a adivinar">
         </div>
 
-        <div id="opciones" class="opciones">
-            <!-- Opciones generadas por JS -->
-        </div>
+        <div id="opciones" class="opciones"></div>
 
         <button class="volver" onclick="volverMenu()">Volver al menú</button>
     </div>
@@ -252,6 +242,8 @@ function volverMenu() {
 
 </body>
 </html>
+
+
 
 
 
