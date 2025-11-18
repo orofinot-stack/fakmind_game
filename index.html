@@ -21,27 +21,22 @@
         overflow: hidden;   /* por si algo se pasa 2px del borde */
     }
 
-    /* LOGO PRINCIPAL */
+    /* LOGO PRINCIPAL (LO DEJO ARRIBA COMO TE GUSTABA) */
     .logo {
         width: 300px;
-        margin-top: 0px;   /* bien pegado arriba como querías */
+        margin-top: 0px;
     }
 
-    /* GRID DE NIVELES */
+    /* GRID DE NIVELES – SOLO AJUSTO POSICIÓN Y ESPACIOS */
     .levels {
-        margin-top: 25px;
+        margin-top: 80px;                  /* 👉 SUBÍ ESTO O BAJALO PARA mover el bloque */
         display: grid;
         grid-template-columns: repeat(2, auto);
-        gap: 26px 50px; /* filas, columnas (más separación horizontal) */
+        row-gap: 90px;                    /* 👉 ESPACIO VERTICAL entre fila 1–2 y 3–4 */
+        column-gap: 50px;                 /* 👉 ESPACIO HORIZONTAL entre 1–2 y 3–4 */
         width: 100%;
         justify-content: center;
         align-items: center;
-    }
-
-    /* SEPARADOR ENTRE 1–2 y 3–4 PARA LAS PORTADAS */
-    .level-row-separator {
-        grid-column: 1 / span 2; /* ocupa las dos columnas */
-        height: 70px;            /* ESPACIO CENTRAL: ajustalo si querés más o menos */
     }
 
     .level-button {
@@ -76,14 +71,13 @@
             width: 200px;
         }
         .levels {
-            gap: 18px 30px;
+            margin-top: 50px;
+            row-gap: 60px;
+            column-gap: 30px;
         }
         .level-button {
             font-size: 20px;
             padding: 22px 8px;
-        }
-        .level-row-separator {
-            height: 50px;
         }
     }
 
@@ -166,27 +160,18 @@
 
     <!-- MENÚ PRINCIPAL -->
     <div id="menu">
-        <!-- LOGO FAKMIND -->
+        <!-- LOGO FAKMIND (arriba) -->
         <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
-        <!-- NIVELES 2x2 CON ESPACIO ENTRE FILAS -->
+        <!-- NIVELES 2x2 -->
         <div class="levels">
-            <!-- Nivel 1 -->
             <div class="level-button" onclick="iniciarNivel1()">
                 NIVEL 1
                 <small>(ADIVINA LA MARCA)</small>
             </div>
 
-            <!-- Nivel 2 -->
             <div class="level-button">NIVEL 2</div>
-
-            <!-- SEPARADOR ENTRE FILAS (ESPACIO PARA PORTADAS) -->
-            <div class="level-row-separator"></div>
-
-            <!-- Nivel 3 -->
             <div class="level-button">NIVEL 3</div>
-
-            <!-- Nivel 4 -->
             <div class="level-button">NIVEL 4</div>
         </div>
     </div>
@@ -260,13 +245,13 @@ function verificar(seleccionada) {
 
 function volverMenu() {
     document.getElementById("nivel1").style.display = "none";
-    // Volvemos al estado original del menú (display por defecto del div)
     document.getElementById("menu").style.display = "block";
 }
 </script>
 
 </body>
 </html>
+
 
 
 
