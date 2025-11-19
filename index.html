@@ -130,13 +130,15 @@
     }
 
     /* VIDAS (CORAZONES) */
-    .vidas-wrapper {
-        position: absolute;
-        top: 300;
-        right: 0px;
-        display: flex;
-        gap: 8px;
-    }
+.vidas-wrapper {
+    position: fixed;
+    top: 120px;     /* ← modificá esta línea para moverlos */
+    right: 40px;    /* ← modificá esta para mover lateral */
+    display: flex;
+    gap: 10px;
+    z-index: 9999;  /* ← asegura que se vea siempre arriba */
+}
+
 
     .vida {
         width: 40px;
@@ -362,6 +364,7 @@ function volverMenu() {
 
 </body>
 </html>
+
 
 
 
