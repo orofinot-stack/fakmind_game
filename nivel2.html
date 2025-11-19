@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nivel 2 – Guess The Sneakers</title>
+<title>Nivel 2 – Guess the Sneakers</title>
 
 <style>
     body {
@@ -21,6 +21,15 @@
         overflow: hidden;
     }
 
+    /* NIVEL 2 */
+    .nivel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+    }
+
     /* VIDAS */
     .vidas-wrapper {
         position: fixed;
@@ -36,7 +45,7 @@
         height: 40px;
     }
 
-    /* Logo zapatilla */
+    /* Logo sneaker */
     .contenedor-logo img {
         width: 260px;
         height: auto;
@@ -82,13 +91,13 @@
         border: none;
     }
 
-    .logo-nivel {
+    .logo-nivel2 {
         width: 220px;
         margin-top: 35px;
         margin-bottom: 20px;
     }
 
-    /* POPUP COMPLETADO */
+    /* POPUP */
     .popup-overlay {
         position: fixed;
         top: 0;
@@ -123,9 +132,11 @@
         cursor: pointer;
     }
 </style>
-</head>
 
+</head>
 <body>
+
+<div id="nivel2" class="nivel">
 
     <!-- VIDAS -->
     <div class="vidas-wrapper">
@@ -136,86 +147,80 @@
     <h2>NIVEL 2 – GUESS THE SNEAKERS</h2>
 
     <div class="contenedor-logo">
-        <img id="logoActual" src="" alt="Sneaker a adivinar">
+        <img id="sneakerActual" src="" alt="Sneaker a adivinar">
     </div>
 
-    <div id="opciones" class="opciones"></div>
+    <div id="opciones2" class="opciones"></div>
 
     <button class="volver" onclick="volverMenu()">Volver al menú</button>
-    <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel">
+    <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel2">
 
-    <!-- POPUP -->
-    <div id="popupNivel2" class="popup-overlay">
-        <div class="popup">
-            <h3>¡Completaste el Nivel 2!</h3>
-            <img src="assets/flecha.png" class="popup-btn" onclick="irANivel3()" />
-        </div>
+</div>
+
+<!-- POPUP COMPLETADO -->
+<div id="popupNivel2" class="popup-overlay">
+    <div class="popup">
+        <h3>¡Nivel 2 completado!</h3>
+        <img src="assets/flecha.png" class="popup-btn" onclick="volverMenu()" />
     </div>
+</div>
 
 <script>
-/* ----------------- CARGÁ ACÁ TUS ZAPATILLAS ----------------- */
+/* --- PREGUNTAS (modificalas vos) --- */
 const sneakers = [
-    {
-        imagen: "assets/sneaker1.png",
-        correcta: "Nike Dunk Low",
-        opciones: ["Jordan 4", "Nike Dunk Low", "Air Force 1", "Yeezy 350"]
-    },
-    {
-        imagen: "assets/sneaker2.png",
-        correcta: "Yeezy 700",
-        opciones: ["Air Max TN", "Yeezy 700", "Jordan 1 High", "Dunk Panda"]
-    },
-    {
-        imagen: "assets/sneaker3.png",
-        correcta: "Jordan 4 Black Cat",
-        opciones: ["Yeezy Slide", "Air Max 1", "Jordan 4 Black Cat", "Forum Low"]
-    }
+    {imagen: "assets/dunk_panda.png", correcta: "Nike Dunk Panda", opciones: ["Jordan 4 Black Cat", "Nike Dunk Panda", "AF1 Triple White", "Yeezy 350 Zebra"]},
+    {imagen: "assets/j4_military.png", correcta: "Jordan 4 Military Black", opciones: ["Jordan 4 Military Black", "Jordan 1 Mocha", "NB 550 White", "Yeezy Slide Bone"]},
+    {imagen: "assets/af1.png", correcta: "Air Force 1", opciones: ["Air Max 90", "Jordan 1 Shadow", "Air Force 1", "Dunk Low Grey"]},
+    {imagen: "assets/j1_mocha.png", correcta: "Jordan 1 Mocha", opciones: ["Jordan 1 Mocha", "Jordan 1 Bred", "Dunk Syracuse", "Jordan 4 Oreo"]},
+    {imagen: "assets/yeezy_zebra.png", correcta: "Yeezy 350 Zebra", opciones: ["Yeezy Slide Bone", "Yeezy 350 Zebra", "Foam Runner Sand", "Ultra Boost B&W"]}
 ];
-/* ------------------------------------------------------------ */
 
-let indice = 0;
-let vidas = 2;
+let i2 = 0;
+let vidas2 = 2;
 
+/* INICIAR NIVEL 2 */
 function iniciarNivel2() {
-    indice = 0;
-    vidas = 2;
+    i2 = 0;
+    vidas2 = 2;
 
     document.getElementById("vida1").src = "assets/corazon_rojo.png";
     document.getElementById("vida2").src = "assets/corazon_rojo.png";
 
-    cargarPregunta();
+    cargarSneaker();
 }
 
-function cargarPregunta() {
-    const snk = sneakers[indice];
-    document.getElementById("logoActual").src = snk.imagen;
+/* CARGAR PREGUNTA */
+function cargarSneaker() {
+    const snk = sneakers[i2];
+    document.getElementById("sneakerActual").src = snk.imagen;
 
-    const contOpciones = document.getElementById("opciones");
-    contOpciones.innerHTML = "";
+    const cont = document.getElementById("opciones2");
+    cont.innerHTML = "";
 
     snk.opciones.forEach(op => {
         let btn = document.createElement("button");
         btn.className = "opcion";
         btn.innerText = op;
-        btn.onclick = () => verificar(op, btn);
-        contOpciones.appendChild(btn);
+        btn.onclick = () => verificar2(op, btn);
+        cont.appendChild(btn);
     });
 }
 
-function verificar(seleccionada, btn) {
-    const correcta = sneakers[indice].correcta;
+/* VERIFICAR RESPUESTA */
+function verificar2(sel, btn) {
+    const correcta = sneakers[i2].correcta;
 
-    if (seleccionada === correcta) {
+    if (sel === correcta) {
         btn.style.backgroundColor = "#2ecc71";
         btn.style.color = "white";
 
         setTimeout(() => {
-            indice++;
+            i2++;
 
-            if (indice >= sneakers.length) {
+            if (i2 >= sneakers.length) {
                 document.getElementById("popupNivel2").style.display = "flex";
             } else {
-                cargarPregunta();
+                cargarSneaker();
             }
         }, 600);
 
@@ -223,12 +228,12 @@ function verificar(seleccionada, btn) {
         btn.style.backgroundColor = "#e74c3c";
         btn.style.color = "white";
 
-        vidas--;
+        vidas2--;
 
-        if (vidas === 1) {
+        if (vidas2 === 1)
             document.getElementById("vida1").src = "assets/corazon_negro.png";
-        }
-        if (vidas === 0) {
+
+        if (vidas2 === 0) {
             document.getElementById("vida2").src = "assets/corazon_negro.png";
             setTimeout(() => volverMenu(), 700);
         }
@@ -240,12 +245,9 @@ function verificar(seleccionada, btn) {
     }
 }
 
+/* VOLVER AL MENÚ (index.html) */
 function volverMenu() {
     window.location.href = "index.html";
-}
-
-function irANivel3() {
-    alert("Nivel 3 lo armamos cuando quieras 🔥");
 }
 </script>
 
