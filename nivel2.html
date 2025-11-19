@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nivel 2 – Guess The Sneakers</title>
+
+<style>
+    body {
+        background: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* VIDAS */
+    .vidas-wrapper {
+        position: fixed;
+        top: 120px;
+        right: 60px;
+        display: flex;
+        gap: 10px;
+        z-index: 9999;
+    }
+
+    .vida {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Logo zapatilla */
+    .contenedor-logo img {
+        width: 260px;
+        height: auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+    /* Opciones */
+    .opciones {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 80%;
+        max-width: 380px;
+    }
+
+    .opcion {
+        padding: 16px;
+        background: #ffffff;
+        color: black;
+        border-radius: 12px;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        transition: 0.2s;
+    }
+
+    .opcion:hover {
+        background: #e3e3e3;
+        transform: scale(1.01);
+    }
+
+    .volver {
+        margin-top: 30px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #333;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+    }
+
+    .logo-nivel {
+        width: 220px;
+        margin-top: 35px;
+        margin-bottom: 20px;
+    }
+
+    /* POPUP COMPLETADO */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+    }
+
+    .popup {
+        background: #111;
+        border: 2px solid #444;
+        padding: 30px 40px;
+        border-radius: 18px;
+        text-align: center;
+        width: 80%;
+        max-width: 350px;
+    }
+
+    .popup h3 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .popup .popup-btn {
+        margin-top: 10px;
+        width: 60px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- VIDAS -->
+    <div class="vidas-wrapper">
+        <img id="vida1" class="vida" src="assets/corazon_rojo.png">
+        <img id="vida2" class="vida" src="assets/corazon_rojo.png">
+    </div>
+
+    <h2>NIVEL 2 – GUESS THE SNEAKERS</h2>
+
+    <div class="contenedor-logo">
+        <img id="logoActual" src="" alt="Sneaker a adivinar">
+    </div>
+
+    <div id="opciones" class="opciones"></div>
+
+    <button class="volver" onclick="volverMenu()">Volver al menú</button>
+    <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel">
+
+    <!-- POPUP -->
+    <div id="popupNivel2" class="popup-overlay">
+        <div class="popup">
+            <h3>¡Completaste el Nivel 2!</h3>
+            <img src="assets/flecha.png" class="popup-btn" onclick="irANivel3()" />
+        </div>
+    </div>
+
+<script>
+/* ----------------- CARGÁ ACÁ TUS ZAPATILLAS ----------------- */
+const sneakers = [
+    {
+        imagen: "assets/sneaker1.png",
+        correcta: "Nike Dunk Low",
+        opciones: ["Jordan 4", "Nike Dunk Low", "Air Force 1", "Yeezy 350"]
+    },
+    {
+        imagen: "assets/sneaker2.png",
+        correcta: "Yeezy 700",
+        opciones: ["Air Max TN", "Yeezy 700", "Jordan 1 High", "Dunk Panda"]
+    },
+    {
+        imagen: "assets/sneaker3.png",
+        correcta: "Jordan 4 Black Cat",
+        opciones: ["Yeezy Slide", "Air Max 1", "Jordan 4 Black Cat", "Forum Low"]
+    }
+];
+/* ------------------------------------------------------------ */
+
+let indice = 0;
+let vidas = 2;
+
+function iniciarNivel2() {
+    indice = 0;
+    vidas = 2;
+
+    document.getElementById("vida1").src = "assets/corazon_rojo.png";
+    document.getElementById("vida2").src = "assets/corazon_rojo.png";
+
+    cargarPregunta();
+}
+
+function cargarPregunta() {
+    const snk = sneakers[indice];
+    document.getElementById("logoActual").src = snk.imagen;
+
+    const contOpciones = document.getElementById("opciones");
+    contOpciones.innerHTML = "";
+
+    snk.opciones.forEach(op => {
+        let btn = document.createElement("button");
+        btn.className = "opcion";
+        btn.innerText = op;
+        btn.onclick = () => verificar(op, btn);
+        contOpciones.appendChild(btn);
+    });
+}
+
+function verificar(seleccionada, btn) {
+    const correcta = sneakers[indice].correcta;
+
+    if (seleccionada === correcta) {
+        btn.style.backgroundColor = "#2ecc71";
+        btn.style.color = "white";
+
+        setTimeout(() => {
+            indice++;
+
+            if (indice >= sneakers.length) {
+                document.getElementById("popupNivel2").style.display = "flex";
+            } else {
+                cargarPregunta();
+            }
+        }, 600);
+
+    } else {
+        btn.style.backgroundColor = "#e74c3c";
+        btn.style.color = "white";
+
+        vidas--;
+
+        if (vidas === 1) {
+            document.getElementById("vida1").src = "assets/corazon_negro.png";
+        }
+        if (vidas === 0) {
+            document.getElementById("vida2").src = "assets/corazon_negro.png";
+            setTimeout(() => volverMenu(), 700);
+        }
+
+        setTimeout(() => {
+            btn.style.backgroundColor = "#ffffff";
+            btn.style.color = "black";
+        }, 600);
+    }
+}
+
+function volverMenu() {
+    window.location.href = "index.html";
+}
+
+function irANivel3() {
+    alert("Nivel 3 lo armamos cuando quieras 🔥");
+}
+</script>
+
+</body>
+</html>
