@@ -27,7 +27,7 @@
         margin-top: 15px;
     }
 
-    /* ---------- MARCOS DE PORTADAS DE LOS NIVELES ---------- */
+    /* ---------- MARCOS PORTADAS ---------- */
     .level {
         display: flex;
         flex-direction: column;
@@ -50,7 +50,7 @@
         object-fit: cover;
     }
 
-    /* GRID DE BOTONES (MENÚ) */
+    /* GRID DE NIVELES */
     .levels {
         margin-top: 50px;
         display: grid;
@@ -88,7 +88,14 @@
         background: #333;
     }
 
-    /* LOGOS INFERIORES (MATA / YOUR FRIENDS) */
+    /* Flecha nivel desbloqueado */
+    .flecha {
+        width: 55px;
+        margin-top: 10px;
+        display: none; /* solo aparece al completar nivel 1 */
+    }
+
+    /* LOGOS INFERIORES */
     .bottom-logos {
         position: absolute;
         bottom: 80px;
@@ -119,16 +126,32 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        position: relative;
     }
 
-    /* Logo de la marca a adivinar */
+    /* VIDAS (CORAZONES) */
+    .vidas-wrapper {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        display: flex;
+        gap: 8px;
+    }
+
+    .vida {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Logo de la marca */
     .contenedor-logo img {
         width: 260px;
         height: auto;
-        margin: 20px 0;
+        margin-top: 50px;
+        margin-bottom: 20px;
     }
 
-    /* Opciones de múltiple choice más grandes */
+    /* Opciones */
     .opciones {
         display: flex;
         flex-direction: column;
@@ -143,11 +166,11 @@
         color: black;
         border-radius: 12px;
         font-weight: bold;
-        font-size: 20px;      /* 🔥 texto más grande */
+        font-size: 20px;
         text-align: center;
         cursor: pointer;
         border: none;
-        transition: background-color 0.2s, color 0.2s, transform 0.1s;
+        transition: 0.2s;
     }
 
     .opcion:hover {
@@ -155,7 +178,6 @@
         transform: scale(1.01);
     }
 
-    /* Botón volver al menú */
     .volver {
         margin-top: 30px;
         padding: 10px 20px;
@@ -167,7 +189,6 @@
         border: none;
     }
 
-    /* Logo Fakmind dentro del nivel 1, entre volver y los logos de abajo */
     .logo-nivel1 {
         width: 220px;
         margin-top: 35px;
@@ -195,12 +216,13 @@
                 </div>
             </div>
 
-            <!-- NIVEL 2 -->
+            <!-- NIVEL 2 + flecha desbloqueo -->
             <div class="level">
                 <div class="level-cover">
                     <img src="assets/portada2.png">
                 </div>
                 <div class="level-button">NIVEL 2</div>
+                <img src="assets/flecha.png" id="flechaNivel2" class="flecha">
             </div>
 
             <!-- NIVEL 3 -->
@@ -222,14 +244,21 @@
         </div>
     </div>
 
-    <!-- LOGOS INFERIORES -->
+    <!-- LOGOS ABAJO -->
     <div class="bottom-logos">
-        <img src="assets/mata.png" class="logo-mata" alt="Mata Club">
-        <img src="assets/yourfriends.png" class="logo-yourfriends" alt="Your Friends">
+        <img src="assets/mata.png" class="logo-mata">
+        <img src="assets/yourfriends.png" class="logo-yourfriends">
     </div>
 
     <!-- NIVEL 1 -->
     <div id="nivel1" class="nivel">
+
+        <!-- VIDAS -->
+        <div class="vidas-wrapper">
+            <img id="vida1" class="vida" src="assets/corazon_rojo.png">
+            <img id="vida2" class="vida" src="assets/corazon_rojo.png">
+        </div>
+
         <h2>NIVEL 1 – ADIVINÁ LA MARCA</h2>
 
         <div class="contenedor-logo">
@@ -239,9 +268,8 @@
         <div id="opciones" class="opciones"></div>
 
         <button class="volver" onclick="volverMenu()">Volver al menú</button>
-
-        <!-- 🔥 Logo Fakmind dentro del nivel, centrado entre volver y los logos de abajo -->
         <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel1">
+
     </div>
 
 <script>
@@ -254,11 +282,18 @@ const logos = [
 ];
 
 let indice = 0;
+let vidas = 2;
 
 function iniciarNivel1() {
     document.getElementById("menu").style.display = "none";
     document.getElementById("nivel1").style.display = "flex";
+
     indice = 0;
+    vidas = 2;
+
+    document.getElementById("vida1").src = "assets/corazon_rojo.png";
+    document.getElementById("vida2").src = "assets/corazon_rojo.png";
+
     cargarPregunta();
 }
 
@@ -282,14 +317,15 @@ function verificar(seleccionada, btn) {
     const correcta = logos[indice].correcta;
 
     if (seleccionada === correcta) {
-        // Correcta → verde
         btn.style.backgroundColor = "#2ecc71";
         btn.style.color = "white";
 
         setTimeout(() => {
             indice++;
+
             if (indice >= logos.length) {
-                alert("¡Completaste el Nivel 1!");
+                // COMPLETÓ EL NIVEL
+                document.getElementById("flechaNivel2").style.display = "block";
                 volverMenu();
             } else {
                 cargarPregunta();
@@ -297,11 +333,20 @@ function verificar(seleccionada, btn) {
         }, 600);
 
     } else {
-        // Incorrecta → rojo
+        // Incorrecta
         btn.style.backgroundColor = "#e74c3c";
         btn.style.color = "white";
 
-        // Opcional: volver el botón al color original después de un rato
+        vidas--;
+
+        if (vidas === 1) {
+            document.getElementById("vida1").src = "assets/corazon_negro.png";
+        }
+        if (vidas === 0) {
+            document.getElementById("vida2").src = "assets/corazon_negro.png";
+            setTimeout(() => volverMenu(), 700);
+        }
+
         setTimeout(() => {
             btn.style.backgroundColor = "#ffffff";
             btn.style.color = "black";
@@ -317,6 +362,8 @@ function volverMenu() {
 
 </body>
 </html>
+
+
 
 
 
