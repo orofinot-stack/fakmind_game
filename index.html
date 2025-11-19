@@ -245,12 +245,12 @@
                 </div>
             </div>
 
-            <!-- NIVEL 2 SIN FLECHA -->
+            <!-- NIVEL 2 (CORREGIDO) -->
             <div class="level">
                 <div class="level-cover">
                     <img src="assets/portada2.png">
                 </div>
-                <div class="level-button" onclick="iniciarNivel2()">NIVEL 2</div>
+                <div class="level-button" onclick="window.location.href='nivel2.html'">NIVEL 2</div>
             </div>
 
             <!-- NIVEL 3 -->
@@ -392,21 +392,16 @@ function volverMenu() {
     document.getElementById("menu").style.display = "block";
 }
 
-/* --- IR AL NIVEL 2 DIRECTO DESDE EL POPUP --- */
+/* --- IR AL NIVEL 2 DESDE EL POPUP --- */
 function irANivel2() {
-    document.getElementById("popupNivel1").style.display = "none";
-    document.getElementById("nivel1").style.display = "none";
-    iniciarNivel2();
+    window.location.href = "nivel2.html";
 }
 
-/* --- TEMPORAL: ARRANQUE DEL NIVEL 2 --- */
-function iniciarNivel2() {
-    alert("Arranca Nivel 2 (lo hacemos ahora si querés)");
-}
 </script>
 
 </body>
 </html>
+
 
 
 
