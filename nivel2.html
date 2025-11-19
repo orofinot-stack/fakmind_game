@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nivel 2 – Guess the Sneakers</title>
+<title>Nivel 2 – Guess The Sneakers</title>
 
 <style>
     body {
@@ -21,6 +21,17 @@
         overflow: hidden;
     }
 
+    /* ---------- ESTRUCTURA GENERAL IGUAL AL NIVEL 1 ---------- */
+
+    .nivel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        width: 100%;
+    }
+
     /* VIDAS */
     .vidas-wrapper {
         position: fixed;
@@ -36,21 +47,23 @@
         height: 40px;
     }
 
-    /* Título */
+    /* TÍTULO (MISMO ESPACIADO QUE NIVEL 1) */
     h2 {
-        margin-top: 35px;
-        font-size: 22px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
     }
 
-    /* Imagen principal (sneaker) */
+    /* IMAGEN PRINCIPAL */
     .contenedor-logo img {
         width: 260px;
         height: auto;
-        margin-top: 65px; /* corregido para igualar nivel 1 */
+        margin-top: 50px;
         margin-bottom: 20px;
     }
 
-    /* Opciones */
+    /* OPCIONES (MISMO TAMAÑO Y TODO IGUAL QUE NIVEL 1) */
     .opciones {
         display: flex;
         flex-direction: column;
@@ -77,7 +90,7 @@
         transform: scale(1.01);
     }
 
-    /* Botón volver */
+    /* VOLVER */
     .volver {
         margin-top: 30px;
         padding: 10px 20px;
@@ -89,14 +102,14 @@
         border: none;
     }
 
-    /* Logo Fakmind abajo */
+    /* LOGO FAKMIND ABAJO (MISMO TAMAÑO) */
     .logo-fakmind {
         width: 220px;
         margin-top: 35px;
         margin-bottom: 20px;
     }
 
-    /* Logos de MATA + YOURFRIENDS (idénticos al nivel 1) */
+    /* LOGOS INF (MISMO QUE NIVEL 1) */
     .bottom-logos {
         position: absolute;
         bottom: 80px;
@@ -106,22 +119,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0; /* ← faltaba en tu nivel 2 */
+        padding: 0;
+        z-index: 1;
     }
 
     .logo-mata {
         height: 30px;
-        object-fit: contain;
         margin-left: 60px;
     }
 
     .logo-yourfriends {
         height: 70px;
-        object-fit: contain;
         margin-right: 60px;
     }
 
-    /* Popup */
+    /* POPUP */
     .popup-overlay {
         position: fixed;
         top: 0;
@@ -155,10 +167,13 @@
         width: 60px;
         cursor: pointer;
     }
+
 </style>
 </head>
 
 <body>
+
+<div id="nivel2" class="nivel">
 
     <!-- VIDAS -->
     <div class="vidas-wrapper">
@@ -166,50 +181,45 @@
         <img id="vida2" class="vida" src="assets/corazon_rojo.png">
     </div>
 
-    <!-- TÍTULO -->
     <h2>NIVEL 2 – GUESS THE SNEAKERS</h2>
 
-    <!-- SNEAKER -->
     <div class="contenedor-logo">
-        <img id="logoActual" src="" alt="Sneaker a adivinar">
+        <img id="sneakerActual" src="" alt="Sneaker a adivinar">
     </div>
 
-    <!-- OPCIONES -->
-    <div id="opciones" class="opciones"></div>
+    <div id="opciones2" class="opciones"></div>
 
-    <!-- BOTÓN VOLVER -->
     <button class="volver" onclick="volverMenu()">Volver al menú</button>
 
-    <!-- LOGO FAKMIND -->
     <img src="assets/logo.png" class="logo-fakmind">
 
-    <!-- LOGOS INFERIORES -->
-    <div class="bottom-logos">
-        <img src="assets/mata.png" class="logo-mata">
-        <img src="assets/yourfriends.png" class="logo-yourfriends">
-    </div>
+</div>
 
-    <!-- POPUP -->
-    <div id="popupNivel2" class="popup-overlay">
-        <div class="popup">
-            <h3>¡Completaste el Nivel 2!</h3>
-            <img src="assets/flecha.png" class="popup-btn" onclick="irANivel3()" />
-        </div>
+<!-- POPUP -->
+<div id="popupNivel2" class="popup-overlay">
+    <div class="popup">
+        <h3>¡Completaste el Nivel 2!</h3>
+        <img src="assets/flecha.png" class="popup-btn" onclick="volverMenu()" />
     </div>
+</div>
+
+<!-- LOGOS FOOTER -->
+<div class="bottom-logos">
+    <img src="assets/mata.png" class="logo-mata">
+    <img src="assets/yourfriends.png" class="logo-yourfriends">
+</div>
 
 <script>
-/* LISTA DE SNEAKERS (EDITÁ ESTO) */
+/* --- SNEAKERS --- */
 const sneakers = [
-    {imagen: "assets/snk1.png", correcta: "Jordan 4", opciones: ["Jordan 1", "Jordan 4", "Dunk", "Yeezy 350"]},
-    {imagen: "assets/snk2.png", correcta: "Yeezy 700", opciones: ["Air Max 90", "Yeezy 700", "Forum", "Air Force 1"]},
-    {imagen: "assets/snk3.png", correcta: "Dunk Low", opciones: ["Dunk Low", "Jordan 5", "New Balance 550", "Asics Kayano"]},
+    {imagen: "assets/snk1.png", correcta: "Jordan 4", opciones: ["Dunk Low", "Jordan 4", "Air Max 1", "Yeezy 700"]},
+    {imagen: "assets/snk2.png", correcta: "Dunk SB", opciones: ["Air Force", "Jordan 1", "Dunk SB", "Yeezy Slide"]},
+    {imagen: "assets/snk3.png", correcta: "Yeezy 350", opciones: ["Yeezy 350", "Dunk Low", "Jordan 6", "Air Max TN"]}
 ];
 
-/* VARIABLES */
 let indice = 0;
 let vidas = 2;
 
-/* INICIAR NIVEL 2 */
 function iniciarNivel2() {
     indice = 0;
     vidas = 2;
@@ -217,28 +227,26 @@ function iniciarNivel2() {
     document.getElementById("vida1").src = "assets/corazon_rojo.png";
     document.getElementById("vida2").src = "assets/corazon_rojo.png";
 
-    cargarPregunta();
+    cargarSneaker();
 }
 
-/* CARGAR SNEAKER */
-function cargarPregunta() {
+function cargarSneaker() {
     const snk = sneakers[indice];
-    document.getElementById("logoActual").src = snk.imagen;
+    document.getElementById("sneakerActual").src = snk.imagen;
 
-    const cont = document.getElementById("opciones");
+    const cont = document.getElementById("opciones2");
     cont.innerHTML = "";
 
     snk.opciones.forEach(op => {
         let btn = document.createElement("button");
         btn.className = "opcion";
         btn.innerText = op;
-        btn.onclick = () => verificar(op, btn);
+        btn.onclick = () => verificar2(op, btn);
         cont.appendChild(btn);
     });
 }
 
-/* VERIFICAR RESPUESTA */
-function verificar(seleccionada, btn) {
+function verificar2(seleccionada, btn) {
     const correcta = sneakers[indice].correcta;
 
     if (seleccionada === correcta) {
@@ -247,11 +255,10 @@ function verificar(seleccionada, btn) {
 
         setTimeout(() => {
             indice++;
-
             if (indice >= sneakers.length) {
                 document.getElementById("popupNivel2").style.display = "flex";
             } else {
-                cargarPregunta();
+                cargarSneaker();
             }
         }, 600);
 
@@ -261,9 +268,7 @@ function verificar(seleccionada, btn) {
 
         vidas--;
 
-        if (vidas === 1) {
-            document.getElementById("vida1").src = "assets/corazon_negro.png";
-        }
+        if (vidas === 1) document.getElementById("vida1").src = "assets/corazon_negro.png";
         if (vidas === 0) {
             document.getElementById("vida2").src = "assets/corazon_negro.png";
             setTimeout(() => volverMenu(), 700);
@@ -276,21 +281,12 @@ function verificar(seleccionada, btn) {
     }
 }
 
-/* VOLVER AL MENÚ */
 function volverMenu() {
     window.location.href = "index.html";
 }
 
-/* IR AL NIVEL 3 */
-function irANivel3() {
-    window.location.href = "nivel3.html";
-}
-
-/* AUTO-START */
-iniciarNivel2();
+window.onload = iniciarNivel2;
 </script>
 
 </body>
 </html>
-
-
