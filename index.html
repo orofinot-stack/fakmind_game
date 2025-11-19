@@ -88,13 +88,6 @@
         background: #333;
     }
 
-    /* Flecha nivel desbloqueado */
-    .flecha {
-        width: 55px;
-        margin-top: 10px;
-        display: none; /* solo aparece al completar nivel 1 */
-    }
-
     /* LOGOS INFERIORES */
     .bottom-logos {
         position: absolute;
@@ -105,22 +98,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0;
     }
 
-    .logo-mata {
-        height: 30px;
-        object-fit: contain;
-        margin-left: 60px;
-    }
+    .logo-mata { height: 30px; margin-left: 60px; }
+    .logo-yourfriends { height: 70px; margin-right: 60px; }
 
-    .logo-yourfriends {
-        height: 70px;
-        object-fit: contain;
-        margin-right: 60px;
-    }
-
-    /* ---------- NIVEL 1 ---------- */
+    /* NIVEL 1 */
     .nivel {
         display: none;
         flex-direction: column;
@@ -129,31 +112,26 @@
         position: relative;
     }
 
-    /* VIDAS (CORAZONES) */
-.vidas-wrapper {
-    position: fixed;
-    top: 120px;     /* ← modificá esta línea para moverlos */
-    right: 60px;    /* ← modificá esta para mover lateral */
-    display: flex;
-    gap: 10px;
-    z-index: 9999;  /* ← asegura que se vea siempre arriba */
-}
-
-
-    .vida {
-        width: 40px;
-        height: 40px;
+    /* VIDAS */
+    .vidas-wrapper {
+        position: fixed;
+        top: 120px;
+        right: 60px;
+        display: flex;
+        gap: 10px;
+        z-index: 9999;
     }
 
-    /* Logo de la marca */
+    .vida { width: 40px; height: 40px; }
+
+    /* IMAGEN PRINCIPAL */
     .contenedor-logo img {
         width: 260px;
-        height: auto;
         margin-top: 50px;
         margin-bottom: 20px;
     }
 
-    /* Opciones */
+    /* OPCIONES */
     .opciones {
         display: flex;
         flex-direction: column;
@@ -169,9 +147,7 @@
         border-radius: 12px;
         font-weight: bold;
         font-size: 20px;
-        text-align: center;
         cursor: pointer;
-        border: none;
         transition: 0.2s;
     }
 
@@ -196,83 +172,112 @@
         margin-top: 35px;
         margin-bottom: 20px;
     }
-</style>
 
+    /* POPUP DE COMPLETADO */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+    }
+
+    .popup {
+        background: #111;
+        border: 2px solid #444;
+        padding: 30px 40px;
+        border-radius: 18px;
+        text-align: center;
+        max-width: 350px;
+        width: 80%;
+    }
+
+    .popup h3 { font-size: 26px; margin-bottom: 25px; }
+    .popup img { width: 60px; cursor: pointer; margin-top: 10px; }
+
+</style>
 </head>
+
 <body>
 
-    <!-- MENÚ PRINCIPAL -->
-    <div id="menu">
-        <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
+<!-- MENÚ -->
+<div id="menu">
+    <img src="assets/logo.png" class="logo">
 
-        <div class="levels">
+    <div class="levels">
 
-            <!-- NIVEL 1 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada1.png">
-                </div>
-                <div class="level-button" onclick="iniciarNivel1()">
-                    NIVEL 1
-                    <small>(GUESS THE BRAND)</small>
-                </div>
+        <!-- NIVEL 1 -->
+        <div class="level">
+            <div class="level-cover"><img src="assets/portada1.png"></div>
+            <div class="level-button" onclick="iniciarNivel1()">
+                NIVEL 1
+                <small>(GUESS THE BRAND)</small>
             </div>
-
-            <!-- NIVEL 2 + flecha desbloqueo -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada2.png">
-                </div>
-                <div class="level-button">NIVEL 2</div>
-                <img src="assets/flecha.png" id="flechaNivel2" class="flecha">
-            </div>
-
-            <!-- NIVEL 3 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada3.png">
-                </div>
-                <div class="level-button">NIVEL 3</div>
-            </div>
-
-            <!-- NIVEL 4 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada4.png">
-                </div>
-                <div class="level-button">NIVEL 4</div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- LOGOS ABAJO -->
-    <div class="bottom-logos">
-        <img src="assets/mata.png" class="logo-mata">
-        <img src="assets/yourfriends.png" class="logo-yourfriends">
-    </div>
-
-    <!-- NIVEL 1 -->
-    <div id="nivel1" class="nivel">
-
-        <!-- VIDAS -->
-        <div class="vidas-wrapper">
-            <img id="vida1" class="vida" src="assets/corazon_rojo.png">
-            <img id="vida2" class="vida" src="assets/corazon_rojo.png">
         </div>
 
-        <h2>NIVEL 1 – GUESS THE BRAND</h2>
-
-        <div class="contenedor-logo">
-            <img id="logoActual" src="" alt="Logo a adivinar">
+        <!-- NIVEL 2 -->
+        <div class="level">
+            <div class="level-cover"><img src="assets/portada2.png"></div>
+            <div class="level-button" onclick="window.location.href='nivel2.html'">
+                NIVEL 2
+                <small>(GUESS THE SNEAKERS)</small>
+            </div>
         </div>
 
-        <div id="opciones" class="opciones"></div>
+        <!-- NIVEL 3 -->
+        <div class="level">
+            <div class="level-cover"><img src="assets/portada3.png"></div>
+            <div class="level-button">NIVEL 3</div>
+        </div>
 
-        <button class="volver" onclick="volverMenu()">Volver al menú</button>
-        <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel1">
+        <!-- NIVEL 4 -->
+        <div class="level">
+            <div class="level-cover"><img src="assets/portada4.png"></div>
+            <div class="level-button">NIVEL 4</div>
+        </div>
 
     </div>
+</div>
+
+<!-- LOGOS ABAJO -->
+<div class="bottom-logos">
+    <img src="assets/mata.png" class="logo-mata">
+    <img src="assets/yourfriends.png" class="logo-yourfriends">
+</div>
+
+<!-- NIVEL 1 -->
+<div id="nivel1" class="nivel">
+
+    <div class="vidas-wrapper">
+        <img id="vida1" class="vida" src="assets/corazon_rojo.png">
+        <img id="vida2" class="vida" src="assets/corazon_rojo.png">
+    </div>
+
+    <h2>NIVEL 1 – GUESS THE BRAND</h2>
+
+    <div class="contenedor-logo">
+        <img id="logoActual" src="">
+    </div>
+
+    <div id="opciones" class="opciones"></div>
+
+    <button class="volver" onclick="volverMenu()">Volver al menú</button>
+    <img src="assets/logo.png" class="logo-nivel1">
+
+</div>
+
+<!-- POPUP -->
+<div id="popupNivel1" class="popup-overlay">
+    <div class="popup">
+        <h3>¡Completaste el Nivel 1!</h3>
+        <img src="assets/flecha.png" onclick="irANivel2()">
+    </div>
+</div>
 
 <script>
 const logos = [
@@ -287,83 +292,77 @@ let indice = 0;
 let vidas = 2;
 
 function iniciarNivel1() {
-    document.getElementById("menu").style.display = "none";
-    document.getElementById("nivel1").style.display = "flex";
-
+    menu.style.display = "none";
+    nivel1.style.display = "flex";
     indice = 0;
     vidas = 2;
-
-    document.getElementById("vida1").src = "assets/corazon_rojo.png";
-    document.getElementById("vida2").src = "assets/corazon_rojo.png";
-
+    vida1.src = "assets/corazon_rojo.png";
+    vida2.src = "assets/corazon_rojo.png";
     cargarPregunta();
 }
 
 function cargarPregunta() {
     const logo = logos[indice];
-    document.getElementById("logoActual").src = logo.imagen;
+    logoActual.src = logo.imagen;
 
-    const contOpciones = document.getElementById("opciones");
-    contOpciones.innerHTML = "";
-
+    opciones.innerHTML = "";
     logo.opciones.forEach(op => {
         let btn = document.createElement("button");
         btn.className = "opcion";
         btn.innerText = op;
         btn.onclick = () => verificar(op, btn);
-        contOpciones.appendChild(btn);
+        opciones.appendChild(btn);
     });
 }
 
-function verificar(seleccionada, btn) {
-    const correcta = logos[indice].correcta;
+function verificar(sel, btn) {
+    if (sel === logos[indice].correcta) {
 
-    if (seleccionada === correcta) {
         btn.style.backgroundColor = "#2ecc71";
         btn.style.color = "white";
 
         setTimeout(() => {
             indice++;
-
             if (indice >= logos.length) {
-                // COMPLETÓ EL NIVEL
-                document.getElementById("flechaNivel2").style.display = "block";
-                volverMenu();
+                document.getElementById("popupNivel1").style.display = "flex";
             } else {
                 cargarPregunta();
             }
-        }, 600);
+        }, 500);
 
     } else {
-        // Incorrecta
         btn.style.backgroundColor = "#e74c3c";
         btn.style.color = "white";
 
         vidas--;
 
-        if (vidas === 1) {
-            document.getElementById("vida1").src = "assets/corazon_negro.png";
-        }
+        if (vidas === 1) vida1.src = "assets/corazon_negro.png";
         if (vidas === 0) {
-            document.getElementById("vida2").src = "assets/corazon_negro.png";
+            vida2.src = "assets/corazon_negro.png";
             setTimeout(() => volverMenu(), 700);
         }
 
         setTimeout(() => {
-            btn.style.backgroundColor = "#ffffff";
+            btn.style.backgroundColor = "#fff";
             btn.style.color = "black";
         }, 600);
     }
 }
 
 function volverMenu() {
-    document.getElementById("nivel1").style.display = "none";
-    document.getElementById("menu").style.display = "block";
+    nivel1.style.display = "none";
+    menu.style.display = "block";
+}
+
+function irANivel2() {
+    window.location.href = "nivel2.html";
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
