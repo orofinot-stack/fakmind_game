@@ -1,408 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fakmind Game</title>
+<!-- MENÚ PRINCIPAL -->
+<div id="menu">
+    <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
 
-<style>
-    body {
-        background: black;
-        color: white;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-    }
+    <div class="levels">
 
-    /* LOGO PRINCIPAL (MENÚ) */
-    .logo {
-        width: 300px;
-        margin-top: 15px;
-    }
-
-    /* ---------- MARCOS PORTADAS ---------- */
-    .level {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .level-cover {
-        width: 160px;
-        height: 160px;
-        background: #222;
-        border: 3px solid #444;
-        border-radius: 18px;
-        margin-bottom: 14px;
-        overflow: hidden;
-    }
-
-    .level-cover img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* GRID DE NIVELES */
-    .levels {
-        margin-top: 50px;
-        display: grid;
-        grid-template-columns: repeat(2, auto);
-        row-gap: 50px;
-        column-gap: 115px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .level-button {
-        background: #1a1a1a;
-        padding: 26px 40px;
-        border-radius: 18px;
-        border: 2px solid #333;
-        font-size: 26px;
-        font-weight: bold;
-        color: white;
-        cursor: pointer;
-        text-decoration: none;
-        transition: 0.2s;
-        text-align: center;
-        min-width: 160px;
-    }
-
-    .level-button small {
-        display: block;
-        font-size: 14px;
-        margin-top: 6px;
-        opacity: 0.8;
-    }
-
-    .level-button:hover {
-        background: #333;
-    }
-
-    /* LOGOS INFERIORES */
-    .bottom-logos {
-        position: absolute;
-        bottom: 80px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0;
-    }
-
-    .logo-mata {
-        height: 30px;
-        object-fit: contain;
-        margin-left: 60px;
-    }
-
-    .logo-yourfriends {
-        height: 70px;
-        object-fit: contain;
-        margin-right: 60px;
-    }
-
-    /* ---------- NIVEL 1 ---------- */
-    .nivel {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        position: relative;
-    }
-
-    /* VIDAS (CORAZONES) */
-    .vidas-wrapper {
-        position: fixed;
-        top: 120px;
-        right: 60px;
-        display: flex;
-        gap: 10px;
-        z-index: 9999;
-    }
-
-    .vida {
-        width: 40px;
-        height: 40px;
-    }
-
-    /* Logo de la marca */
-    .contenedor-logo img {
-        width: 260px;
-        height: auto;
-        margin-top: 50px;
-        margin-bottom: 20px;
-    }
-
-    /* Opciones */
-    .opciones {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        width: 80%;
-        max-width: 380px;
-    }
-
-    .opcion {
-        padding: 16px;
-        background: #ffffff;
-        color: black;
-        border-radius: 12px;
-        font-weight: bold;
-        font-size: 20px;
-        text-align: center;
-        cursor: pointer;
-        border: none;
-        transition: 0.2s;
-    }
-
-    .opcion:hover {
-        background: #e3e3e3;
-        transform: scale(1.01);
-    }
-
-    .volver {
-        margin-top: 30px;
-        padding: 10px 20px;
-        border-radius: 10px;
-        background: #333;
-        color: #fff;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-    }
-
-    .logo-nivel1 {
-        width: 220px;
-        margin-top: 35px;
-        margin-bottom: 20px;
-    }
-
-    /* ---------- POPUP DE COMPLETADO ---------- */
-    .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.65);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999;
-    }
-
-    .popup {
-        background: #111;
-        border: 2px solid #444;
-        padding: 30px 40px;
-        border-radius: 18px;
-        text-align: center;
-        width: 80%;
-        max-width: 350px;
-    }
-
-    .popup h3 {
-        font-size: 26px;
-        margin-bottom: 25px;
-    }
-
-    .popup .popup-btn {
-        margin-top: 10px;
-        width: 60px;
-        cursor: pointer;
-    }
-</style>
-
-</head>
-<body>
-
-    <!-- MENÚ PRINCIPAL -->
-    <div id="menu">
-        <img src="assets/logo.png" alt="Fakmind Logo" class="logo">
-
-        <div class="levels">
-
-            <!-- NIVEL 1 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada1.png">
-                </div>
-                <div class="level-button" onclick="iniciarNivel1()">
-                    NIVEL 1
-                    <small>(GUESS THE BRAND)</small>
-                </div>
+        <!-- NIVEL 1 -->
+        <div class="level">
+            <div class="level-cover">
+                <img src="assets/portada1.png">
             </div>
-
-            <!-- NIVEL 2 (CORREGIDO) -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada2.png">
-                </div>
-                <div class="level-button" onclick="window.location.href='nivel2.html'">NIVEL 2</div>
-                    <small>(GUESS THE SNEAKERS)</small>
-                </div>
+            <div class="level-button" onclick="iniciarNivel1()">
+                NIVEL 1
+                <small>(GUESS THE BRAND)</small>
             </div>
-
-            <!-- NIVEL 3 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada3.png">
-                </div>
-                <div class="level-button">NIVEL 3</div>
-            </div>
-
-            <!-- NIVEL 4 -->
-            <div class="level">
-                <div class="level-cover">
-                    <img src="assets/portada4.png">
-                </div>
-                <div class="level-button">NIVEL 4</div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- LOGOS ABAJO -->
-    <div class="bottom-logos">
-        <img src="assets/mata.png" class="logo-mata">
-        <img src="assets/yourfriends.png" class="logo-yourfriends">
-    </div>
-
-    <!-- NIVEL 1 -->
-    <div id="nivel1" class="nivel">
-
-        <!-- VIDAS -->
-        <div class="vidas-wrapper">
-            <img id="vida1" class="vida" src="assets/corazon_rojo.png">
-            <img id="vida2" class="vida" src="assets/corazon_rojo.png">
         </div>
 
-        <h2>NIVEL 1 – GUESS THE BRAND </h2>
-
-        <div class="contenedor-logo">
-            <img id="logoActual" src="" alt="Logo a adivinar">
+        <!-- NIVEL 2 (CORREGIDO AL 100%) -->
+        <div class="level">
+            <div class="level-cover">
+                <img src="assets/portada2.png">
+            </div>
+            <div class="level-button" onclick="window.location.href='nivel2.html'">
+                NIVEL 2
+                <small>(GUESS THE SNEAKERS)</small>
+            </div>
         </div>
 
-        <div id="opciones" class="opciones"></div>
-
-        <button class="volver" onclick="volverMenu()">Volver al menú</button>
-        <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel1">
-
-    </div>
-
-    <!-- POPUP COMPLETADO -->
-    <div id="popupNivel1" class="popup-overlay">
-        <div class="popup">
-            <h3>¡Completaste el Nivel 1!</h3>
-            <img src="assets/flecha.png" class="popup-btn" onclick="irANivel2()" />
+        <!-- NIVEL 3 -->
+        <div class="level">
+            <div class="level-cover">
+                <img src="assets/portada3.png">
+            </div>
+            <div class="level-button">NIVEL 3</div>
         </div>
+
+        <!-- NIVEL 4 -->
+        <div class="level">
+            <div class="level-cover">
+                <img src="assets/portada4.png">
+            </div>
+            <div class="level-button">NIVEL 4</div>
+        </div>
+
     </div>
+</div>
 
-<script>
-const logos = [
-    {imagen: "assets/supreme.png", correcta: "Supreme", opciones: ["Stüssy", "Nike", "Carhartt", "Supreme"]},
-    {imagen: "assets/offwhite.png", correcta: "Off-White", opciones: ["Off-White", "Adidas", "Yeezy", "Chrome Hearts"]},
-    {imagen: "assets/lv.png", correcta: "Louis Vuitton", opciones: ["Gucci", "Louis Vuitton", "Dior", "Fendi"]},
-    {imagen: "assets/palm.png", correcta: "Palm Angels", opciones: ["Fear of God", "Vans", "Palm Angels", "Kenzo"]},
-    {imagen: "assets/sp5der.png", correcta: "Sp5der", opciones: ["Sp5der", "Nike", "Supreme", "Puma"]}
-];
 
-let indice = 0;
-let vidas = 2;
 
-function iniciarNivel1() {
-    document.getElementById("menu").style.display = "none";
-    document.getElementById("nivel1").style.display = "flex";
-
-    indice = 0;
-    vidas = 2;
-
-    document.getElementById("vida1").src = "assets/corazon_rojo.png";
-    document.getElementById("vida2").src = "assets/corazon_rojo.png";
-
-    cargarPregunta();
-}
-
-function cargarPregunta() {
-    const logo = logos[indice];
-    document.getElementById("logoActual").src = logo.imagen;
-
-    const contOpciones = document.getElementById("opciones");
-    contOpciones.innerHTML = "";
-
-    logo.opciones.forEach(op => {
-        let btn = document.createElement("button");
-        btn.className = "opcion";
-        btn.innerText = op;
-        btn.onclick = () => verificar(op, btn);
-        contOpciones.appendChild(btn);
-    });
-}
-
-function verificar(seleccionada, btn) {
-    const correcta = logos[indice].correcta;
-
-    if (seleccionada === correcta) {
-        btn.style.backgroundColor = "#2ecc71";
-        btn.style.color = "white";
-
-        setTimeout(() => {
-            indice++;
-
-            if (indice >= logos.length) {
-                document.getElementById("popupNivel1").style.display = "flex";
-            } else {
-                cargarPregunta();
-            }
-        }, 600);
-
-    } else {
-        btn.style.backgroundColor = "#e74c3c";
-        btn.style.color = "white";
-
-        vidas--;
-
-        if (vidas === 1) {
-            document.getElementById("vida1").src = "assets/corazon_negro.png";
-        }
-        if (vidas === 0) {
-            document.getElementById("vida2").src = "assets/corazon_negro.png";
-            setTimeout(() => volverMenu(), 700);
-        }
-
-        setTimeout(() => {
-            btn.style.backgroundColor = "#ffffff";
-            btn.style.color = "black";
-        }, 600);
-    }
-}
-
-function volverMenu() {
-    document.getElementById("nivel1").style.display = "none";
-    document.getElementById("menu").style.display = "block";
-}
-
-/* --- IR AL NIVEL 2 DESDE EL POPUP --- */
-function irANivel2() {
-    window.location.href = "nivel2.html";
-}
-
-</script>
-
-</body>
-</html>
 
 
 
