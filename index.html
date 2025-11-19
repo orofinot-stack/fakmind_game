@@ -88,13 +88,6 @@
         background: #333;
     }
 
-    /* Flecha nivel desbloqueado */
-    .flecha {
-        width: 55px;
-        margin-top: 10px;
-        display: none; /* solo aparece al completar nivel 1 */
-    }
-
     /* LOGOS INFERIORES */
     .bottom-logos {
         position: absolute;
@@ -130,15 +123,14 @@
     }
 
     /* VIDAS (CORAZONES) */
-.vidas-wrapper {
-    position: fixed;
-    top: 120px;     /* ← modificá esta línea para moverlos */
-    right: 60px;    /* ← modificá esta para mover lateral */
-    display: flex;
-    gap: 10px;
-    z-index: 9999;  /* ← asegura que se vea siempre arriba */
-}
-
+    .vidas-wrapper {
+        position: fixed;
+        top: 120px;
+        right: 60px;
+        display: flex;
+        gap: 10px;
+        z-index: 9999;
+    }
 
     .vida {
         width: 40px;
@@ -196,6 +188,41 @@
         margin-top: 35px;
         margin-bottom: 20px;
     }
+
+    /* ---------- POPUP DE COMPLETADO ---------- */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+    }
+
+    .popup {
+        background: #111;
+        border: 2px solid #444;
+        padding: 30px 40px;
+        border-radius: 18px;
+        text-align: center;
+        width: 80%;
+        max-width: 350px;
+    }
+
+    .popup h3 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .popup .popup-btn {
+        margin-top: 10px;
+        width: 60px;
+        cursor: pointer;
+    }
 </style>
 
 </head>
@@ -218,13 +245,12 @@
                 </div>
             </div>
 
-            <!-- NIVEL 2 + flecha desbloqueo -->
+            <!-- NIVEL 2 SIN FLECHA -->
             <div class="level">
                 <div class="level-cover">
                     <img src="assets/portada2.png">
                 </div>
-                <div class="level-button">NIVEL 2</div>
-                <img src="assets/flecha.png" id="flechaNivel2" class="flecha">
+                <div class="level-button" onclick="iniciarNivel2()">NIVEL 2</div>
             </div>
 
             <!-- NIVEL 3 -->
@@ -272,6 +298,14 @@
         <button class="volver" onclick="volverMenu()">Volver al menú</button>
         <img src="assets/logo.png" alt="Fakmind Logo" class="logo-nivel1">
 
+    </div>
+
+    <!-- POPUP COMPLETADO -->
+    <div id="popupNivel1" class="popup-overlay">
+        <div class="popup">
+            <h3>¡Completaste el Nivel 1!</h3>
+            <img src="assets/flecha.png" class="popup-btn" onclick="irANivel2()" />
+        </div>
     </div>
 
 <script>
@@ -326,16 +360,13 @@ function verificar(seleccionada, btn) {
             indice++;
 
             if (indice >= logos.length) {
-                // COMPLETÓ EL NIVEL
-                document.getElementById("flechaNivel2").style.display = "block";
-                volverMenu();
+                document.getElementById("popupNivel1").style.display = "flex";
             } else {
                 cargarPregunta();
             }
         }, 600);
 
     } else {
-        // Incorrecta
         btn.style.backgroundColor = "#e74c3c";
         btn.style.color = "white";
 
@@ -360,10 +391,23 @@ function volverMenu() {
     document.getElementById("nivel1").style.display = "none";
     document.getElementById("menu").style.display = "block";
 }
+
+/* --- IR AL NIVEL 2 DIRECTO DESDE EL POPUP --- */
+function irANivel2() {
+    document.getElementById("popupNivel1").style.display = "none";
+    document.getElementById("nivel1").style.display = "none";
+    iniciarNivel2();
+}
+
+/* --- TEMPORAL: ARRANQUE DEL NIVEL 2 --- */
+function iniciarNivel2() {
+    alert("Arranca Nivel 2 (lo hacemos ahora si querés)");
+}
 </script>
 
 </body>
 </html>
+
 
 
 
