@@ -21,7 +21,6 @@
         overflow: hidden;
     }
 
-    /* MISMO QUE NIVEL 1 */
     .nivel {
         display: flex;
         flex-direction: column;
@@ -31,7 +30,7 @@
         width: 100%;
     }
 
-    /* VIDAS (IDÉNTICO) */
+    /* VIDAS */
     .vidas-wrapper {
         position: fixed;
         top: 120px;
@@ -46,7 +45,7 @@
         height: 40px;
     }
 
-    /* TÍTULO (IDÉNTICO) */
+    /* TÍTULO */
     h2 {
         margin-top: 20px;
         margin-bottom: 10px;
@@ -54,7 +53,7 @@
         font-weight: bold;
     }
 
-    /* IMAGEN PRINCIPAL (IDÉNTICO) */
+    /* IMAGEN PRINCIPAL */
     .contenedor-logo img {
         width: 260px;
         height: auto;
@@ -62,7 +61,7 @@
         margin-bottom: 20px;
     }
 
-    /* OPCIONES (IDÉNTICO) */
+    /* OPCIONES */
     .opciones {
         display: flex;
         flex-direction: column;
@@ -89,7 +88,7 @@
         transform: scale(1.01);
     }
 
-    /* VOLVER (IDÉNTICO) */
+    /* VOLVER */
     .volver {
         margin-top: 30px;
         padding: 10px 20px;
@@ -101,14 +100,14 @@
         border: none;
     }
 
-    /* LOGO FAKMIND ABAJO (IDÉNTICO) */
+    /* LOGO FAKMIND */
     .logo-fakmind {
         width: 220px;
         margin-top: 35px;
         margin-bottom: 20px;
     }
 
-    /* LOGOS INFERIORES (IDÉNTICO) */
+    /* LOGOS INFERIORES */
     .bottom-logos {
         position: absolute;
         bottom: 80px;
@@ -132,7 +131,7 @@
         margin-right: 60px;
     }
 
-    /* POPUP (IDÉNTICO) */
+    /* POPUP */
     .popup-overlay {
         position: fixed;
         top: 0;
@@ -166,7 +165,6 @@
         width: 60px;
         cursor: pointer;
     }
-
 </style>
 </head>
 
@@ -194,7 +192,7 @@
 
 </div>
 
-<!-- POPUP FIN NIVEL -->
+<!-- POPUP FINAL -->
 <div id="popupNivel2" class="popup-overlay">
     <div class="popup">
         <h3>¡Completaste el Nivel 2!</h3>
@@ -213,10 +211,10 @@
 const sneakers = [
     {imagen: "assets/snk1.png", correcta: "Out Of Office", opciones: ["LV Skate", "Jordan 4", "Air Force 1", "Out Of Office"]},
     {imagen: "assets/snk2.png", correcta: "Jordan 4", opciones: ["Jordan 11", "Bape Sk8 Sta", "Jordan 4", "Yeezy Slide"]},
-    {imagen: "assets/snk3.png", correcta: "Forum Bad Bunny", opciones: ["Forum Bad Bunny", "Campus Bad Bunny", "Gazelle Bad Bunny", "Response Bad Bunny"]}
+    {imagen: "assets/snk3.png", correcta: "Forum Bad Bunny", opciones: ["Forum Bad Bunny", "Campus Bad Bunny", "Gazelle Bad Bunny", "Response Bad Bunny"]},
     {imagen: "assets/snk4.png", correcta: "Yeezy Foam Runner", opciones: ["Yeezy Slide", "Yeezy 350", "Yeezy Foam Runner", "Yeezy 700"]},
-    {imagen: "assets/snk5.png", correcta: "Shox TL", opciones: ["Air Max Tn", "Shox TL", "Uptempo", "Vapormax"]},
-]
+    {imagen: "assets/snk5.png", correcta: "Shox TL", opciones: ["Air Max Tn", "Shox TL", "Uptempo", "Vapormax"]}
+];
 
 let indice = 0;
 let vidas = 2;
@@ -286,8 +284,10 @@ function volverMenu() {
     window.location.href = "index.html";
 }
 
+/* INICIAR AUTOMÁTICAMENTE */
 window.onload = iniciarNivel2;
 </script>
 
 </body>
 </html>
+
